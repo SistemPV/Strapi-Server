@@ -7,7 +7,7 @@
     "displayName": "Menu"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {

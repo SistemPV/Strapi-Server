@@ -37,12 +37,14 @@
       "type": "password",
       "required": true
     },
-    "roles": {
+    "role": {
       "type": "boolean",
+      "default": false,
       "required": true
     },
-    "status_active": {
+    "estatus": {
       "type": "boolean",
+      "default": true,
       "required": true
     }
   }
