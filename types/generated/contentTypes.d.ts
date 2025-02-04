@@ -438,7 +438,7 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
     singularName: 'menu';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
