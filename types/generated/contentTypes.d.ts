@@ -487,12 +487,14 @@ export interface ApiSubmenuSubmenu extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    usuarios: Schema.Attribute.Relation<'manyToMany', 'api::usuario.usuario'>;
   };
 }
 
 export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
   collectionName: 'usuarios';
   info: {
+    description: '';
     displayName: 'Usuario';
     pluralName: 'usuarios';
     singularName: 'usuario';
@@ -524,6 +526,7 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
     role: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
+    submenus: Schema.Attribute.Relation<'manyToMany', 'api::submenu.submenu'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
