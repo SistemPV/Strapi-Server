@@ -433,12 +433,13 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
   collectionName: 'menus';
   info: {
+    description: '';
     displayName: 'Menu';
     pluralName: 'menus';
     singularName: 'menu';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -447,6 +448,38 @@ export interface ApiMenuMenu extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::menu.menu'> &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    submenus: Schema.Attribute.Relation<'oneToMany', 'api::submenu.submenu'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSubmenuSubmenu extends Struct.CollectionTypeSchema {
+  collectionName: 'submenus';
+  info: {
+    displayName: 'Submenu';
+    pluralName: 'submenus';
+    singularName: 'submenu';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::submenu.submenu'
+    > &
+      Schema.Attribute.Private;
+    menu: Schema.Attribute.Relation<'manyToOne', 'api::menu.menu'>;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -465,7 +498,7 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
     singularName: 'usuario';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     cargo: Schema.Attribute.String & Schema.Attribute.Required;
@@ -1012,6 +1045,7 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::global.global': ApiGlobalGlobal;
       'api::menu.menu': ApiMenuMenu;
+      'api::submenu.submenu': ApiSubmenuSubmenu;
       'api::usuario.usuario': ApiUsuarioUsuario;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

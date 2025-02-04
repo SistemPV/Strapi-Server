@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "menus",
+  "collectionName": "submenus",
   "info": {
-    "singularName": "menu",
-    "pluralName": "menus",
-    "displayName": "Menu",
-    "description": ""
+    "singularName": "submenu",
+    "pluralName": "submenus",
+    "displayName": "Submenu"
   },
   "options": {
     "draftAndPublish": false
@@ -17,11 +16,11 @@
       "required": true,
       "unique": true
     },
-    "submenus": {
+    "menu": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::submenu.submenu",
-      "mappedBy": "menu"
+      "relation": "manyToOne",
+      "target": "api::menu.menu",
+      "inversedBy": "submenus"
     }
   }
 }
